@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.seata.tbl.mapper.TblRepoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cly.seata.module.tbl.entity.TblRepo">
+        <id column="id" property="id" />
+        <result column="product_code" property="productCode" />
+        <result column="count" property="count" />
+        <result column="name" property="name" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product_code, count, name
+    </sql>
+    <update id="decreaseRepo">
+        update tbl_repo set count=count-${count} where product_code = #{productCode} and count>0
+    </update>
+</mapper>
