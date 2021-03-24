@@ -8,7 +8,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDubbo
-@EnableDiscoveryClient
 public class AccountProviderApplication {
 
 	public static void main(String[] args) {
