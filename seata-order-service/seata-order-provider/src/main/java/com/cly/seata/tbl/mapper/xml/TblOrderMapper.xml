@@ -17,6 +17,6 @@
     </sql>
     <insert id="createOrder" keyProperty="id" useGeneratedKeys="true"
             parameterType="com.cly.seata.module.tbl.entity.TblOrder">
-        insert into tbl_order values(null,#{orderNo},#{userId},#{productCode},${count},${amount})
+        insert into tbl_order(id,order_no,user_id,product_code,count,money) values(null,#{orderNo},#{userId},#{productCode},${count},${amount})
     </insert>
 </mapper>

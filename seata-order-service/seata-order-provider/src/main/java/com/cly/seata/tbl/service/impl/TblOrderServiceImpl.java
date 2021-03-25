@@ -44,7 +44,8 @@ public class TblOrderServiceImpl extends ServiceImpl<TblOrderMapper, TblOrder> i
             Result<Object> accountRes = accountService.decreaseAccount(accountDto);
             //创建订单
             TblOrder order=new TblOrder();
-            order.setOrderNo(UUID.randomUUID().toString());
+            order.setProductCode(orderDto.getProductCode());
+            order.setUserId(orderDto.getUserId());
             order.setAmount(orderDto.getOrderAmount());
             order.setCount(orderDto.getOrderCount());
             orderMapper.createOrder(order);
