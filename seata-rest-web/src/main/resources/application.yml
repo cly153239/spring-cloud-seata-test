@@ -1,6 +1,10 @@
 spring:
   application:
     name: seata-rest-web
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 server:
   port: 8890
 dubbo:
@@ -8,12 +12,14 @@ dubbo:
     port: -1
     name: dubbo
   registry:
-    address: nacos://127.0.0.1:8848
+    address: spring-cloud://127.0.0.1
   scan:
     base-packages: com.cly.springcloud.*
+  cloud:
+    subscribed-services: seta-account-provider,seta-order-provider,seta-repo-provider
 seata:
   enabled: true
-  tx-service-group: sample-rest-web
+  tx-service-group: my_test_tx_group
   transport:
     type: TCP
     server: NIO
@@ -34,7 +40,8 @@ seata:
     serialization: seata
     compressor: none
   service:
-    vgroup-mapping: default
+    vgroup-mapping:
+      my_test_tx_group: default
     enable-degrade: false
     disable-global-transaction: false
     #grouplist: 192.168.216.128:8091
@@ -59,8 +66,8 @@ seata:
     support:
       spring:
         datasource-autoproxy: false
-  registry:
-    type: nacos
-    nacos:
-      cluster: default
-      server-addr: 127.0.0.1:8848
+#  registry:
+#    type: nacos
+#    nacos:
+#      cluster: default
+#      server-addr: 127.0.0.1:8848

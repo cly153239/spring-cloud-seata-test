@@ -4,23 +4,28 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/seata_order?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/seata_account?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 
 server:
   port: 8893
 dubbo:
   registry:
-    address: nacos://127.0.0.1:8848
+    address: spring-cloud://127.0.0.1
   protocol:
     port: -1
     name: dubbo
   scan:
     base-packages: com.cly.springcloud.*
-
+  application:
+    qos-port: 33333
 seata:
   enabled: true
-  tx-service-group: sample-repo-service
+  tx-service-group: my_test_tx_group
   transport:
     type: TCP
     server: NIO
@@ -41,7 +46,8 @@ seata:
     serialization: seata
     compressor: none
   service:
-    vgroup-mapping: default
+    vgroup-mapping:
+      my_test_tx_group: default
     enable-degrade: false
     disable-global-transaction: false
     #grouplist: 192.168.216.128:8091
@@ -66,8 +72,20 @@ seata:
     support:
       spring:
         datasource-autoproxy: true
-  registry:
-    type: nacos
-    nacos:
-      cluster: default
-      server-addr: 127.0.0.1:8848
+    #  registry:
+    #    type: nacos
+    #    nacos:
+    #      cluster: default
+    #      server-addr: 127.0.0.1:8848
+    #服务注册到nacos
+#    registry:
+#      type: nacos
+#      nacos:
+#        application: seta-account-provider
+#        serverAddr: 127.0.0.1:8848
+#        group: SEATA_GROUP
+#        namespace: "public"
+#        username: "nacos"
+#        password: "nacos"
+#        cluster: gph
+
