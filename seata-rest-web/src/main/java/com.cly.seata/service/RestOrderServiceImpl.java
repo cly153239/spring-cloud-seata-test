@@ -24,7 +24,7 @@ public class RestOrderServiceImpl implements IRestOrderService {
     TblRepoService repoService;
 
     @Override
-    @GlobalTransactional(timeoutMills = 300000, name = "sample-rest-web")
+    @GlobalTransactional(timeoutMills = 300000, name = "my_test_tx_group")
     public Result<Object> handleBusiness(OrderRequest orderRequest) throws Exception {
         log.info("开始全局事务:xid="+ RootContext.getXID());
         log.info("begin order: "+orderRequest);
